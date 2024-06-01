@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    <title>O mnie - Kamil Grabarczyk</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -13,12 +13,12 @@
             margin: 0;
             padding: 0;
             display: flex;
-             flex-direction: column;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
             text-align: center;
         }
-                .container-wrapper {
+        .container-wrapper {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -28,26 +28,28 @@
         .container {
             flex: 1;
             max-width: 45%;
-            padding: 40px;
+            padding: 20px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             margin: 10px;
             box-sizing: border-box;
         }
-@media only screen and (max-width:400px){
-                   .container {
-            width:130%;
-            height:20%;
+        .full-width-container {
+            width: 90%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin: 10px;
+            box-sizing: border-box;
         }
-}
-        
-        h1 {
-            font-size: 3em;
+        h1, h2, h3 {
+            font-size: 2em;
             margin-bottom: 20px;
         }
         p {
-            font-size: 1.2em;
+            font-size: 1em;
             line-height: 1.6;
         }
         a {
@@ -63,53 +65,87 @@
             background: #1da1f2;
             color: #fff;
         }
+        .social-icons {
+            margin-top: 30px;
+        }
+        .social-icons a {
+            margin: 0 10px;
+            font-size: 1.5em;
+            transition: transform 0.3s;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+        article {
+            text-align: left;
+            margin-top: 20px;
+        }
+        article h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        article p {
+            font-size: 1em;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .article-images {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .article-images img {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+        .article-images img.resize {
+            max-width: 150px; /* 50% of 300px */
+        }
+        @media (max-width: 768px) {
+            .container, .full-width-container {
+                width: 90%;
+                max-width: none;
+                padding: 20px;
+            }
+            h1, h2, h3 {
+                font-size: 1.5em;
+            }
+            p, article p {
+                font-size: 1em;
+            }
+            .article-images img {
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container-wrapper">
         <div class="container">
-            <h2>Badania koniunktury gospodarczej - wnioski, ocena i podsumowanie wyników</h2>
-                <article>
-                <p>Koniunktura gospodarcza to jeden z najistotniejszych wskaźników określających stan gospodarki państwa, nastroje przedsiębiorców i ich przewidywnia co do przyszłości. W artykule przyjrzymy się dotychczasowym wynikom badań prowadzonych przez GUS.</p>
-            </article>
+            <h1>O mnie</h1>
+            <p>Nazywam się Kamil Grabarczyk i jestem specjalistą w [Twoja dziedzina]. Mam doświadczenie w [Twoje doświadczenie zawodowe] i pasjonuję się [Twoje zainteresowania]. Jestem zaangażowany w [Twoje zaangażowanie lub projekty], co pozwala mi rozwijać moje umiejętności i wiedzę w tej dziedzinie.</p>
             <p><a href="index.html">Powrót do strony głównej</a></p>
-            <p><a href="article1.html">Sprawdź artykuł</a></p>
-        </div>
         </div>
 
-
-
-
-    
-<!--
-        <div class="container">
-            <h2>Wykształcenie</h2>
-            <p>Posiadam wykształcenie w [Twoje wykształcenie]. Ukończyłem [Twoja uczelnia] w [rok ukończenia] roku.</p>
-        </div>
-    </div>
-
-    <div class="container-wrapper">
-        <div class="container">
-            <h2>Projekty</h2>
-            <p>W ciągu swojej kariery pracowałem nad wieloma projektami, takimi jak [Projekt 1], [Projekt 2], i [Projekt 3]. Każdy z tych projektów pozwolił mi rozwijać swoje umiejętności i zdobywać cenne doświadczenie.</p>
-        </div>
-
-        <div class="container">
-            <h2>Hobby i Zainteresowania</h2>
-            <p>W wolnym czasie pasjonuję się [Twoje hobby]. Uwielbiam [Opis hobby], co pomaga mi zrelaksować się i naładować energię na kolejne wyzwania zawodowe.</p>
-        </div>
-            <div class="container-wrapper">
-        <div class="container">
-            <h2>Projekty</h2>
-            <p>W ciągu swojej kariery pracowałem nad wieloma projektami, takimi jak [Projekt 1], [Projekt 2], i [Projekt 3]. Każdy z tych projektów pozwolił mi rozwijać swoje umiejętności i zdobywać cenne doświadczenie.</p>
-        </div>
-
-        <div class="container">
-            <h2>Hobby i Zainteresowania</h2>
-            <p>W wolnym czasie pasjonuję się [Twoje hobby]. Uwielbiam [Opis hobby], co pomaga mi zrelaksować się i naładować energię na kolejne wyzwania zawodowe.</p>
+        <div class="full-width-container">
+            <article>
+                <h3>Analiza Danych: Klucz do Sukcesu</h3>
+                <div class="article-images">
+                    <img src="image1.jpg" alt="Data Analysis Image 1" class="resize">
+                    <img src="image2.jpg" alt="Data Analysis Image 2">
+                    <img src="image3.jpg" alt="Data Analysis Image 3">
+                </div>
+                <p>Analiza danych to proces przekształcania surowych danych w wartościowe informacje, które mogą wspierać decyzje biznesowe. Dzięki nowoczesnym technologiom, takim jak sztuczna inteligencja i uczenie maszynowe, analiza danych stała się bardziej dostępna i skuteczna niż kiedykolwiek wcześniej.</p>
+                <p>Jednym z najważniejszych aspektów analizy danych jest możliwość identyfikowania wzorców i trendów, które mogą nie być widoczne na pierwszy rzut oka. Na przykład, analiza danych sprzedażowych może ujawnić sezonowe wzrosty i spadki popytu, co pozwala firmom lepiej planować swoje zasoby i kampanie marketingowe.</p>
+                <p>W mojej pracy koncentruję się na wykorzystaniu narzędzi takich jak Python i SQL do analizy dużych zbiorów danych. Moim celem jest nie tylko zrozumienie aktualnych trendów, ale także przewidywanie przyszłych zmian, aby pomóc firmom przygotować się na nadchodzące wyzwania. Dzięki analizie danych mogłem już wielokrotnie wspierać moich klientów w podejmowaniu lepszych decyzji biznesowych, co przyczyniło się do ich sukcesu na rynku.</p>
+            </article>
         </div>
     </div>
-    -->
+
+    <div class="social-icons">
+        <a href="https://www.linkedin.com/in/kamil-grabarczyk-6b7333273/" target="_blank">mój linkedin</a>
     </div>
 </body>
 </html>
