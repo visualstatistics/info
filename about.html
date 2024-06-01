@@ -13,18 +13,27 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
+             flex-direction: column;
             align-items: center;
             min-height: 100vh;
             text-align: center;
         }
+                .container-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 20px;
+        }
         .container {
-            max-width: 900px;
+            flex: 1;
+            max-width: 45%;
             padding: 40px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            margin: 20px;
+            margin: 10px;
+            box-sizing: border-box;
         }
         h1 {
             font-size: 3em;
@@ -50,29 +59,29 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>O mnie</h1>
-        <p>Nazywam się Kamil Grabarczyk i jestem specjalistą w [Twoja dziedzina]. Mam doświadczenie w [Twoje doświadczenie zawodowe] i pasjonuję się [Twoje zainteresowania]. Jestem zaangażowany w [Twoje zaangażowanie lub projekty], co pozwala mi rozwijać moje umiejętności i wiedzę w tej dziedzinie.</p>
-        <p><a href="index.html">Powrót do strony głównej</a></p>
-    </div>
+    <div class="container-wrapper">
         <div class="container">
-        <h1>O mnie</h1>
-        <p>Nazywam się Kamil Grabarczyk i jestem specjalistą w [Twoja dziedzina]. Mam doświadczenie w [Twoje doświadczenie zawodowe] i pasjonuję się [Twoje zainteresowania]. Jestem zaangażowany w [Twoje zaangażowanie lub projekty], co pozwala mi rozwijać moje umiejętności i wiedzę w tej dziedzinie.</p>
-        <p><a href="index.html">Powrót do strony głównej</a></p>
-    </div>
-</body>
-<br />
-</head>
-<body>
-    <div class="container">
-        <h1>O mnie</h1>
-        <p>Nazywam się Kamil Grabarczyk i jestem specjalistą w [Twoja dziedzina]. Mam doświadczenie w [Twoje doświadczenie zawodowe] i pasjonuję się [Twoje zainteresowania]. Jestem zaangażowany w [Twoje zaangażowanie lub projekty], co pozwala mi rozwijać moje umiejętności i wiedzę w tej dziedzinie.</p>
-        <p><a href="index.html">Powrót do strony głównej</a></p>
-    </div>
+            <h1>O mnie</h1>
+            <p>Nazywam się Kamil Grabarczyk i jestem specjalistą w [Twoja dziedzina]. Mam doświadczenie w [Twoje doświadczenie zawodowe] i pasjonuję się [Twoje zainteresowania]. Jestem zaangażowany w [Twoje zaangażowanie lub projekty], co pozwala mi rozwijać moje umiejętności i wiedzę w tej dziedzinie.</p>
+            <p><a href="index.html">Powrót do strony głównej</a></p>
+        </div>
+
         <div class="container">
-        <h1>O mnie</h1>
-        <p>Nazywam się Kamil Grabarczyk i jestem specjalistą w [Twoja dziedzina]. Mam doświadczenie w [Twoje doświadczenie zawodowe] i pasjonuję się [Twoje zainteresowania]. Jestem zaangażowany w [Twoje zaangażowanie lub projekty], co pozwala mi rozwijać moje umiejętności i wiedzę w tej dziedzinie.</p>
-        <p><a href="index.html">Powrót do strony głównej</a></p>
+            <h2>Wykształcenie</h2>
+            <p>Posiadam wykształcenie w [Twoje wykształcenie]. Ukończyłem [Twoja uczelnia] w [rok ukończenia] roku.</p>
+        </div>
+    </div>
+
+    <div class="container-wrapper">
+        <div class="container">
+            <h2>Projekty</h2>
+            <p>W ciągu swojej kariery pracowałem nad wieloma projektami, takimi jak [Projekt 1], [Projekt 2], i [Projekt 3]. Każdy z tych projektów pozwolił mi rozwijać swoje umiejętności i zdobywać cenne doświadczenie.</p>
+        </div>
+
+        <div class="container">
+            <h2>Hobby i Zainteresowania</h2>
+            <p>W wolnym czasie pasjonuję się [Twoje hobby]. Uwielbiam [Opis hobby], co pomaga mi zrelaksować się i naładować energię na kolejne wyzwania zawodowe.</p>
+        </div>
     </div>
 </body>
 </html>
