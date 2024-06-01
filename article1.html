@@ -81,12 +81,12 @@
         }
         .article-images img {
             width: 100%;
-            max-width: 300px;
+            max-width: 600px;
             margin: 10px;
             border-radius: 10px;
         }
         .article-images img.resize {
-            max-width: 150px; /* 50% of 300px */
+            width: 50%;
         }
         @media (max-width: 768px) {
             h1, h2, h3 {
@@ -98,6 +98,9 @@
             .article-images img {
                 max-width: 100%;
                 height: auto;
+            }
+            .article-images img.resize {
+                width: 100%;
             }
         }
     </style>
