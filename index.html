@@ -7,12 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
         img {
-  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-  filter: grayscale(100%);
-}
+            max-width: 100%;
+            height: auto;
+        }
         body {
             font-family: 'Fira Sans', sans-serif;
-            background: url('gosp_heat_nowy-modified.png') no-repeat center center fixed; /* Zamień link na prawidłowy adres URL obrazu */
+            background: url('gosp_heat_nowy-modified.png') no-repeat center center fixed;
             background-size: cover;
             color: #f0f0f0;
             margin: 0;
@@ -25,24 +25,19 @@
         }
         .overlay {
             background: rgba(0,0,0,0.8);
-            padding: 40px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             margin: 20px;
-            max-width: 900px;
-            width: 100%;
+            max-width: 90%;
         }
-        h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-        h2 {
+        h1, h2 {
             font-size: 2em;
             margin-bottom: 15px;
             margin-top: 30px;
         }
         p {
-            font-size: 1.2em;
+            font-size: 1em;
             line-height: 1.6;
         }
         a {
@@ -59,7 +54,7 @@
             color: #fff;
         }
         .social-icons {
-            margin-top: 30px;
+            margin-top: 20px;
         }
         .social-icons a {
             margin: 0 10px;
@@ -70,9 +65,25 @@
             transform: scale(1.2);
         }
         footer {
-            margin-top: 70px;
-            font-size: 0.9em;
+            margin-top: 50px;
+            font-size: 0.8em;
             color: #bbb;
+        }
+
+        @media only screen and (min-width: 768px) {
+            .overlay {
+                padding: 40px;
+            }
+            h1, h2 {
+                font-size: 3em;
+            }
+            p {
+                font-size: 1.2em;
+            }
+            footer {
+                margin-top: 70px;
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
@@ -80,18 +91,19 @@
     <div class="overlay">
         <h1>Visual Statistics</h1>
         <p>to blog traktujący o tematyce statystycznej. W przystępny i ciekawy sposób ilustrowane są w nim i analizowane wyniki badań statystycznych prowadzonych m.in. przez GUS i Eurostat. </p>
-            <br />
+        <br />
         <p><a href="about.html">Artykuły i analizy</a></p>
     </div>
 
-       <div class="overlay">
+    <div class="overlay">
         <h2>O mnie</h2>
         <p>Nazywam się Kamil Grabarczyk. Od 2022 r. jestem pracownikiem Urzędu Statystycznego w Zielonej Górze, gdzie zajmuję się badaniami dot. koniunktury gospodarczej. Zainteresowanie tematyką statystyczną, a także chęć przedstawienia istotności badań statystycznych szerszej publiczności skłoniły mnie do założenia tej strony. <br>
             Zaznaczam jednocześnie, że opinie i interpretacje przedstawiane na blogu są prywatne i nie mają związku z oficjalną linią instytucji GUS. W razie pytań, uwag czy sugestii zapraszam do kontaktu na moim profilu linkedin:</p>
-            <br />
-         <p><a href="https://www.linkedin.com/in/kamil-grabarczyk-6b7333273/" target="_blank">linkedin</a></p>
+        <br />
+        <p><a href="https://www.linkedin.com/in/kamil-grabarczyk-6b7333273/" target="_blank">linkedin</a></p>
     </div>
-        <footer>
+
+    <footer>
         &copy; 2024 Kamil Grabarczyk. Wszelkie prawa zastrzeżone.
     </footer>
 </body>
