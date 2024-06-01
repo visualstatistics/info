@@ -6,6 +6,10 @@
     <title>Visual Statistics</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        img {
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}
         body {
             font-family: 'Fira Sans', sans-serif;
             background: url('gosp_heat_nowy.png') no-repeat center center fixed; /* Zamień link na prawidłowy adres URL obrazu */
@@ -19,9 +23,6 @@
             min-height: 100vh;
             text-align: center;
         }
-        .img{
-            filter: brightness(0.5) saturate(0%);
-         }
         .overlay {
             background: rgba(0,0,0,0.8);
             padding: 40px;
