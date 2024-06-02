@@ -238,4 +238,11 @@
             });
         }
 
-        // Update the view count and display
+        // Update the view count and display comments when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            updateViewCount();
+            displayComments();
+        });
+    </script>
+</body>
+</html>
