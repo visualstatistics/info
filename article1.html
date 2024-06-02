@@ -272,8 +272,8 @@
             if (replyText !== "") {
                 const comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
                 if (comments[parentIndex].replies === undefined) {
-                    comments[parentIndex].replies = [];                
-                    comments[parentIndex].replies.push(replyText);
+                    comments[parentIndex].replies = [];
+                     comments[parentIndex].replies.push(replyText);
                 localStorage.setItem('comments', JSON.stringify(comments));
                 displayComments();
             }
@@ -287,6 +287,4 @@
     </script>
 </body>
 </html>
-
-               
 
