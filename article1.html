@@ -172,10 +172,6 @@
             </article>
         </div>
     </div>
-<body>
-    <h1>Welcome to Visit Counter</h1>
-    <p>This page has been visited <?php include 'counter.php'; ?> times.</p>
-</body>
     <div class="social-icons">
         <p><a href="index.html">Powrót do strony głównej</a></p>
     </div>
@@ -229,6 +225,18 @@
                 alert("Nieprawidłowe hasło. Nie masz uprawnień do usunięcia tego komentarza.");
             }
         }
+         // Function to add a reply to a comment
+        function addReply(commentIndex) {
+            const replyInput = document.getElementById(`replyInput-${commentIndex}`);
+            const replyText = replyInput.value.trim();
+            if (replyText !== "") {
+                const comments = JSON.parse(localStorage.getItem('comments'));
+                comments[commentIndex].replies.push(replyText);
+                localStorage.setItem('comments', JSON.stringify(comments));
+                displayComments();
+                replyInput.value = "";
+            }
+        }
 
         // Function to display comments
         function displayComments() {
@@ -250,6 +258,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             updateViewCount();
             displayComments();
+            addReply();
         });
     </script>
 </body>
