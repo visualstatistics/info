@@ -242,7 +242,18 @@
                 commentsContainer.appendChild(commentElement);
             });
         }
-
+        // Function to add a reply to a comment
+        function addReply(commentIndex) {
+            const replyInput = document.getElementById(`replyInput-${commentIndex}`);
+            const replyText = replyInput.value.trim();
+            if (replyText !== "") {
+                const comments = JSON.parse(localStorage.getItem('comments'));
+                comments[commentIndex].replies.push(replyText);
+                localStorage.setItem('comments', JSON.stringify(comments));
+                displayComments();
+                replyInput.value = "";
+            }
+        }
         // Update view count and display comments when the page loads
         document.addEventListener('DOMContentLoaded', () => {
             updateViewCount();
