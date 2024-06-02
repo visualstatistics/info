@@ -143,6 +143,8 @@
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 10px;
+        }
+        .comment .comment-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -155,6 +157,20 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 0.9em;
+        }
+        .comment .reply-button {
+            background-color: #1da1f2;
+            margin-left: 10px;
+        }
+        .comment .reply-button:hover {
+            background-color: #0d8bd4;
+        }
+        .replies {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+        .replies .comment {
+            background: rgba(255, 255, 255, 0.05);
         }
     </style>
 </head>
@@ -207,7 +223,7 @@
             const commentText = commentInput.value.trim();
             if (commentText !== "") {
                 const comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
-                comments.push(commentText);
+                comments.push({ text: commentText, replies: [] });
                 localStorage.setItem('comments', JSON.stringify(comments));
                 displayComments();
                 commentInput.value = "";
@@ -227,7 +243,18 @@
             }
         }
 
-        // Function to display comments
+        // Function to add a reply to a comment
+        function addReply(index) {
+            const replyText = prompt("Napisz swoją odpowiedź:");
+            if (replyText) {
+                let comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
+                comments[index].replies.push(replyText);
+                localStorage.setItem('comments', JSON.stringify(comments));
+                displayComments();
+            }
+        }
+
+        // Function to display comments and replies
         function displayComments() {
             const comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
             const commentsContainer = document.getElementById('comments');
@@ -236,8 +263,16 @@
                 const commentElement = document.createElement('div');
                 commentElement.classList.add('comment');
                 commentElement.innerHTML = `
-                    <span>${comment}</span>
-                    <button onclick="removeComment(${index})">Usuń</button>
+                    <div class="comment-content">
+                        <span>${comment.text}</span>
+                        <div>
+                            <button onclick="removeComment(${index})">Usuń</button>
+                            <button class="reply-button" onclick="addReply(${index})">Odpowiedz</button>
+                        </div>
+                    </div>
+                    <div class="replies">
+                        ${comment.replies.map(reply => `<div class="comment">${reply}</div>`).join('')}
+                    </div>
                 `;
                 commentsContainer.appendChild(commentElement);
             });
