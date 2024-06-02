@@ -217,13 +217,13 @@
         // Function to remove a comment
         function removeComment(index) {
             const password = prompt("Podaj hasło administratora strony aby usunąć komentarz:");
-            if (password === "ewa196812") {
+            if (password === "C8n:rtEeJ9b1") {
                 let comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
                 comments.splice(index, 1);
                 localStorage.setItem('comments', JSON.stringify(comments));
                 displayComments();
             } else {
-                alert("Incorrect password. You do not have permission to remove this comment.");
+                alert("Nieprawidłowe hasło. Nie masz uprawnień do usunięcia komentarza.");
             }
         }
 
