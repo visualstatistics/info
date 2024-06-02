@@ -143,6 +143,18 @@
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .comment button {
+            padding: 5px 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
         }
     </style>
 </head>
@@ -202,24 +214,28 @@
             }
         }
 
+        // Function to remove a comment
+        function removeComment(index) {
+            let comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
+            comments.splice(index, 1);
+            localStorage.setItem('comments', JSON.stringify(comments));
+            displayComments();
+        }
+
         // Function to display comments
         function displayComments() {
             const comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
             const commentsContainer = document.getElementById('comments');
             commentsContainer.innerHTML = "";
-            comments.forEach(comment => {
+            comments.forEach((comment, index) => {
                 const commentElement = document.createElement('div');
                 commentElement.classList.add('comment');
-                commentElement.innerText = comment;
+                commentElement.innerHTML = `
+                    <span>${comment}</span>
+                    <button onclick="removeComment(${index})">Usuń</button>
+                `;
                 commentsContainer.appendChild(commentElement);
             });
         }
 
-        // Update the view count and display comments when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            updateViewCount();
-            displayComments();
-        });
-    </script>
-</body>
-</html>
+        // Update the view count and display
