@@ -144,10 +144,8 @@
             border-radius: 5px;
             margin-bottom: 10px;
             display: flex;
-            flex-direction: column;
-        }
-        .comment span {
-            margin-bottom: 10px;
+            justify-content: space-between;
+            align-items: center;
         }
         .comment button {
             padding: 5px 10px;
@@ -157,9 +155,6 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 0.9em;
-        }
-        .reply-button {
-            margin-top: 10px;
         }
     </style>
 </head>
@@ -243,40 +238,9 @@
                 commentElement.innerHTML = `
                     <span>${comment}</span>
                     <button onclick="removeComment(${index})">Usuń</button>
-                    <button class="reply-button" onclick="replyToComment(${index})">Odpowiedz</button>
-                    <div class="reply-section" id="replySection_${index}"></div>
                 `;
                 commentsContainer.appendChild(commentElement);
             });
-        }
-
-        // Function to reply to a comment
-        function replyToComment(parentIndex) {
-            const replySection = document.getElementById(`replySection_${parentIndex}`);
-            const replyInput = document.createElement('textarea');
-            replyInput.setAttribute('rows', '2');
-            replyInput.setAttribute('placeholder', 'Napisz swoją odpowiedź tutaj...');
-            const replyButton = document.createElement('button');
-            replyButton.innerText = 'Dodaj odpowiedź';
-            replyButton.onclick = function() {
-                addReply(parentIndex, replyInput.value.trim());
-                replyInput.value = '';
-            };
-            replySection.innerHTML = '';
-            replySection.appendChild(replyInput);
-            replySection.appendChild(replyButton);
-        }
-
-        // Function to add a reply to a comment
-        function addReply(parentIndex, replyText) {
-            if (replyText !== "") {
-                const comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
-                if (comments[parentIndex].replies === undefined) {
-                    comments[parentIndex].replies = [];
-                     comments[parentIndex].replies.push(replyText);
-                localStorage.setItem('comments', JSON.stringify(comments));
-                displayComments();
-            }
         }
 
         // Update view count and display comments when the page loads
@@ -287,4 +251,3 @@
     </script>
 </body>
 </html>
-
