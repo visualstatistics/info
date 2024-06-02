@@ -216,10 +216,15 @@
 
         // Function to remove a comment
         function removeComment(index) {
-            let comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
-            comments.splice(index, 1);
-            localStorage.setItem('comments', JSON.stringify(comments));
-            displayComments();
+            const password = prompt("Podaj hasło administratora strony aby usunąć komentarz:");
+            if (password === "ewa196812") {
+                let comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
+                comments.splice(index, 1);
+                localStorage.setItem('comments', JSON.stringify(comments));
+                displayComments();
+            } else {
+                alert("Incorrect password. You do not have permission to remove this comment.");
+            }
         }
 
         // Function to display comments
@@ -238,7 +243,7 @@
             });
         }
 
-        // Update the view count and display comments when the page loads
+        // Update view count and display comments when the page loads
         document.addEventListener('DOMContentLoaded', () => {
             updateViewCount();
             displayComments();
