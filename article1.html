@@ -202,10 +202,10 @@
 </head>
 <body>
   <div id="commentsContainer">
-    <h2>Comments</h2>
+    <h2>Sekcja komentarzy</h2>
     <div id="comments"></div>
     <div id="addCommentForm">
-      <input type="text" id="newComment" placeholder="Add a comment" />
+      <input type="text" id="newComment" placeholder="Dodaj komentarz" />
       <button onclick="addComment()">Add Comment</button>
     </div>
   </div>
@@ -228,8 +228,8 @@
       commentDiv.innerHTML = `
         <p>${comment.text}</p>
         <div class="actions">
-          <button onclick="replyToComment(${index})">Reply</button>
-          <button onclick="deleteComment(${index})">Delete</button>
+          <button onclick="replyToComment(${index})">Odpowiedz</button>
+          <button onclick="deleteComment(${index})">Usuń</button>
         </div>
         ${comment.replies ? comment.replies.map((reply, replyIndex) => createReplyElement(reply, index, replyIndex)).join('') : ''}
       `;
@@ -268,7 +268,7 @@
     }
 
     function deleteComment(index) {
-      const password = prompt('Enter password to delete:');
+      const password = prompt('Wpisz hasło administratora aby usunąć komentarz:');
       if (password === 'ablugabluga') {
         comments.splice(index, 1);
         saveComments();
@@ -279,13 +279,13 @@
     }
 
     function deleteReply(commentIndex, replyIndex) {
-      const password = prompt('Enter password to delete:');
+      const password = prompt('Wpisz hasło administratora aby usunąć komentarz:');
       if (password === 'ablugabluga') {
         comments[commentIndex].replies.splice(replyIndex, 1);
         saveComments();
         renderComments();
       } else {
-        alert('Incorrect password.');
+        alert('Nieprawidłowe hasło. Nie masz uprawnień do usuwania komentarzy.');
       }
     }
 
