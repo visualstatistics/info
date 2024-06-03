@@ -191,6 +191,7 @@
     </div>
 
     <script>
+        // Function to update the view count in localStorage
         function updateViewCount() {
             let viewCount = localStorage.getItem('viewCount');
             if (viewCount) {
@@ -202,6 +203,7 @@
             document.getElementById('viewCount').innerText = viewCount;
         }
 
+        // Function to add a comment
         function addComment(parentIndex = null) {
             const commentInput = parentIndex !== null ? document.getElementById(`replyInput-${parentIndex}`) : document.getElementById('commentInput');
             const commentText = commentInput.value.trim();
@@ -218,6 +220,7 @@
             }
         }
 
+        // Function to remove a comment
         function removeComment(index, parentIndex = null) {
             const password = prompt("Podaj hasło administratora strony aby usunąć komentarz:");
             if (password === "adminPassword") {
@@ -234,6 +237,7 @@
             }
         }
 
+        // Function to display comments
         function displayComments() {
             const comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
             const commentsContainer = document.getElementById('comments');
@@ -276,6 +280,7 @@
             }
         }
 
+        // Update view count and display comments when the page loads
         document.addEventListener('DOMContentLoaded', () => {
             updateViewCount();
             displayComments();
