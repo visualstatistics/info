@@ -255,7 +255,12 @@
                 repliesDiv.appendChild(replyBox);
             }
         }
-
+        // Update view count and display comments when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            updateViewCount();
+            addComment();
+            addReply();
+        });
     </script>
 </body>
 </html>
