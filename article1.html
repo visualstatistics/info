@@ -148,6 +148,7 @@
             margin-top: 20px;
             margin-bottom: 20px;
             text-align: left;
+            font-family: 'Fira Sans', sans-serif;
         }
         .comment button {
             padding: 5px 10px;
@@ -156,6 +157,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-family: 'Fira Sans', sans-serif;
             font-size: 0.9em;
         }
                 .reply button {
@@ -165,6 +167,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+                    font-family: 'Fira Sans', sans-serif;
             font-size: 0.9em;
         }
 
@@ -190,7 +193,7 @@
     .reply {
       margin-left: 30px;
       border-left: 2px solid #ddd;
-        
+        font-family: 'Fira Sans', sans-serif;
     }
     .comment:last-child, .reply:last-child {
       border-bottom: none;
@@ -216,6 +219,8 @@
       background-color: #007BFF;
       color: white;
       cursor: pointer;
+        margin-top: 100px;
+        font-family: 'Fira Sans', sans-serif;
     }
     button:hover {
       padding: 8px 16px;
@@ -224,6 +229,7 @@
       background-color: #007BFF;
       color: white;
       cursor: pointer;
+        font-family: 'Fira Sans', sans-serif;
     }
 
     </style>
@@ -275,6 +281,7 @@
     <div id="addCommentForm">
       <input type="text" id="newComment" rows="4" placeholder="Napisz swój komentarz tutaj..." />
       <button onclick="addComment()">Dodaj komentarz</button>
+        
     </div>
   </div>
 
@@ -344,7 +351,7 @@ function chBackcolor(color) {
         saveComments();
         renderComments();
       } else {
-        alert('Incorrect password.');
+        alert('Nieprawidłowe hasło. Nie masz uprawnień do usuwania komentarzy.');
       }
     }
 
