@@ -232,7 +232,15 @@
       cursor: pointer;
         font-family: 'Fira Sans', sans-serif;
     }
-
+#newComment {
+            width: 100%;
+            box-sizing: border-box; /* Ensures padding and border are included in the width */
+        }
+        @media (min-width: 768px) {
+            #newComment {
+                width: 200%; /* Double the width for larger screens */
+            }
+        }
     </style>
 </head>
 <body>
