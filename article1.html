@@ -203,6 +203,17 @@
     <button onclick="addComment()">Submit</button>
 
     <script>
+                // Function to update the view count in localStorage
+        function updateViewCount() {
+            let viewCount = localStorage.getItem('viewCount');
+            if (viewCount) {
+                viewCount = parseInt(viewCount) + 1;
+            } else {
+                viewCount = 1;
+            }
+            localStorage.setItem('viewCount', viewCount);
+            document.getElementById('viewCount').innerText = viewCount;
+        }
         let commentsSection = document.getElementById('comments-section');
 
         function addComment(parentId = null) {
@@ -251,6 +262,11 @@
                 repliesDiv.appendChild(replyBox);
             }
         }
+
+                // Update view count and display comments when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            updateViewCount();
+        });
     </script>
 </body>
 </html>
