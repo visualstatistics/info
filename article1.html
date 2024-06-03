@@ -138,7 +138,7 @@
             margin-top: 20px;
             text-align: left;
         }
-        .comment {
+        .comment, .reply {
             background: rgba(255, 255, 255, 0.1);
             padding: 10px;
             border-radius: 5px;
@@ -147,7 +147,10 @@
             justify-content: space-between;
             align-items: center;
         }
-        .comment button {
+        .reply {
+            margin-left: 20px;
+        }
+        .comment button, .reply button {
             padding: 5px 10px;
             background-color: red;
             color: white;
@@ -200,41 +203,37 @@
             document.getElementById('viewCount').innerText = viewCount;
         }
 
-        // Function to add a comment
-        function addComment() {
-            const commentInput = document.getElementById('commentInput');
+        // Function to add a comment or reply
+        function addComment(parentIndex = null) {
+            const commentInput = parentIndex !== null ? document.getElementById(`replyInput-${parentIndex}`) : document.getElementById('commentInput');
             const commentText = commentInput.value.trim();
             if (commentText !== "") {
-                const comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
-                comments.push(commentText);
+                let comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
+                if (parentIndex !== null) {
+                    comments[parentIndex].replies.push(commentText);
+                } else {
+                    comments.push({ text: commentText, replies: [] });
+                }
                 localStorage.setItem('comments', JSON.stringify(comments));
                 displayComments();
                 commentInput.value = "";
             }
         }
 
-        // Function to remove a comment
-        function removeComment(index) {
+        // Function to remove a comment or reply
+        function removeComment(index, parentIndex = null) {
             const password = prompt("Podaj hasło administratora strony aby usunąć komentarz:");
             if (password === "adminPassword") {
                 let comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
-                comments.splice(index, 1);
+                if (parentIndex !== null) {
+                    comments[parentIndex].replies.splice(index, 1);
+                } else {
+                    comments.splice(index, 1);
+                }
                 localStorage.setItem('comments', JSON.stringify(comments));
                 displayComments();
             } else {
                 alert("Nieprawidłowe hasło. Nie masz uprawnień do usunięcia tego komentarza.");
-            }
-        }
-         // Function to add a reply to a comment
-        function addReply(commentIndex) {
-            const replyInput = document.getElementById(`replyInput-${commentIndex}`);
-            const replyText = replyInput.value.trim();
-            if (replyText !== "") {
-                const comments = JSON.parse(localStorage.getItem('comments'));
-                comments[commentIndex].replies.push(replyText);
-                localStorage.setItem('comments', JSON.stringify(comments));
-                displayComments();
-                replyInput.value = "";
             }
         }
 
@@ -247,18 +246,45 @@
                 const commentElement = document.createElement('div');
                 commentElement.classList.add('comment');
                 commentElement.innerHTML = `
-                    <span>${comment}</span>
-                    <button onclick="removeComment(${index})">Usuń</button>
+                    <span>${comment.text}</span>
+                    <div>
+                        <button onclick="removeComment(${index})">Usuń</button>
+                        <button onclick="showReplyBox(${index})">Odpowiedz</button>
+                    </div>
+                    <div class="replies" id="replies-${index}"></div>
                 `;
                 commentsContainer.appendChild(commentElement);
+                if (comment.replies.length > 0) {
+                    comment.replies.forEach((reply, replyIndex) => {
+                        const replyElement = document.createElement('div');
+                        replyElement.classList.add('reply');
+                        replyElement.innerHTML = `
+                            <span>${reply}</span>
+                            <button onclick="removeComment(${replyIndex}, ${index})">Usuń</button>
+                        `;
+                        commentElement.querySelector(`#replies-${index}`).appendChild(replyElement);
+                    });
+                }
             });
+        }
+
+        // Function to show reply input box
+        function showReplyBox(commentIndex) {
+            const repliesDiv = document.getElementById(`replies-${commentIndex}`);
+            if (!document.getElementById(`replyInput-${commentIndex}`)) {
+                const replyBox = document.createElement('div');
+                replyBox.innerHTML = `
+                    <textarea id="replyInput-${commentIndex}" rows="2" placeholder="Napisz swoją odpowiedź tutaj..."></textarea>
+                    <button onclick="addComment(${commentIndex})">Dodaj odpowiedź</button>
+                `;
+                repliesDiv.appendChild(replyBox);
+            }
         }
 
         // Update view count and display comments when the page loads
         document.addEventListener('DOMContentLoaded', () => {
             updateViewCount();
             displayComments();
-            addReply();
         });
     </script>
 </body>
