@@ -132,93 +132,64 @@
             font-size: 1em;
         }
         .comment-section button:hover {
-     padding: 8px 16px;
-            margin-top: 20px;
-      border: none;
-      border-radius: 4px;
-      background-color: #007BFF;
-      color: white;
-      cursor: pointer;
+            background-color: #0056b3;
         }
         .comments {
             margin-top: 20px;
             text-align: left;
         }
-        .comment button {
+        .comment, .reply {
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            position: relative;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            text-align: left;
+            font-size: 0.9em;
+            font-family: 'Fira Sans', sans-serif;
+        }
+        .comment button, .reply button {
             padding: 5px 10px;
             background-color: red;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 0.9em;
+            font-size: 0.8em;
         }
-                .reply button {
-            padding: 5px 10px;
-            background-color: red;
-            color: white;
+        .reply {
+            margin-left: 30px;
+            border-left: 2px solid #ddd;
+        }
+        .comment:last-child, .reply:last-child {
+            border-bottom: none;
+        }
+        .actions {
+            margin-top: 10px;
+        }
+        .actions button {
+            margin-right: 10px;
+        }
+        input[type="text"] {
+            width: calc(100% - 140px);
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Fira Sans', sans-serif;
+        }
+        button {
+            padding: 8px 16px;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
             cursor: pointer;
-            font-size: 0.9em;
         }
-
-    #commentsContainer {
-
-        max-width: 724px;
-      width: 100%;
-      padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      border-radius: 8px;
-    }
-    .comment, .reply {
-      border-bottom: 1px solid #ddd;
-      padding: 10px;
-      position: relative;
-      overflow-wrap: break-word;
-      word-wrap: break-word;
-      hyphens: auto;
-        text-align: left;
-    }
-    .reply {
-      margin-left: 30px;
-      border-left: 2px solid #ddd;
-        
-    }
-    .comment:last-child, .reply:last-child {
-      border-bottom: none;
-    }
-    .actions {
-      margin-top: 10px;
-    }
-    .actions button {
-      margin-right: 10px;
-    }
-    input[type="text"] {
-      width: calc(100% - 140px);
-      padding: 8px;
-      margin-right: 40px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-    button {
-      padding: 8px 16px;
-      border: none;
-      border-radius: 4px;
-      background-color: #007BFF;
-      color: white;
-      cursor: pointer;
-    }
-    button:hover {
-      padding: 8px 16px;
-      border: none;
-      border-radius: 4px;
-      background-color: #007BFF;
-      color: white;
-      cursor: pointer;
-    }
-
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -238,13 +209,9 @@
     <div class="social-icons">
         <p><a href="index.html">Powrót do strony głównej</a></p>
     </div>
-
-
     <div class="view-counter">
         Liczba wyświetleń: <span id="viewCount">0</span>
     </div>
-
-
     <script>
         // Function to update the view count in localStorage
         function updateViewCount() {
@@ -258,110 +225,93 @@
             document.getElementById('viewCount').innerText = viewCount;
         }
     </script>
-
-
-
-    
-    
-  <div id="commentsContainer">
-    <div id="comments"></div>
-    <div id="addCommentForm">
-      <input type="text" id="newComment" rows="4" placeholder="Napisz swój komentarz tutaj..." />
-      <button onclick="addComment()">Dodaj komentarz</button>
+    <div id="commentsContainer">
+        <h3>Komentarze</h3>
+        <div id="comments"></div>
+        <div id="addCommentForm">
+            <input type="text" id="newComment" rows="4" placeholder="Napisz swój komentarz tutaj..." />
+            <button onclick="addComment()">Dodaj komentarz</button>
+        </div>
     </div>
-  </div>
-
-  <script>
-    const commentsContainer = document.getElementById('comments');
-    let comments = JSON.parse(localStorage.getItem('comments')) || [];
-
-    function renderComments() {
-      commentsContainer.innerHTML = '';
-      comments.forEach((comment, index) => {
-        commentsContainer.appendChild(createCommentElement(comment, index));
-      });
-    }
-function chBackcolor(color) {
-   document.body.style.background = color;
-}
-    function createCommentElement(comment, index) {
-      const commentDiv = document.createElement('div');
-      commentDiv.classList.add('comment');
-      commentDiv.dataset.index = index;
-      commentDiv.innerHTML = `
-        <p>${comment.text}</p>
-        <div class="actions">
-          <button onclick="replyToComment(${index})">Odpowiedz</button>
-          <button onclick="deleteComment(${index})">Usuń</button>
-        </div>
-        ${comment.replies ? comment.replies.map((reply, replyIndex) => createReplyElement(reply, index, replyIndex)).join('') : ''}
-      `;
-      return commentDiv;
-    }
-
-    function createReplyElement(reply, commentIndex, replyIndex) {
-      return `
-        <div class="reply" data-comment-index="${commentIndex}" data-reply-index="${replyIndex}">
-          <p>${reply.text}</p>
-          <div class="actions">
-            <button onclick="deleteReply(${commentIndex}, ${replyIndex})">Usuń</button>
-          </div>
-        </div>
-      `;
-    }
-
-    function addComment() {
-      const newCommentInput = document.getElementById('newComment');
-      const text = newCommentInput.value.trim();
-      if (text) {
-        comments.push({ text, replies: [] });
-        newCommentInput.value = '';
-        saveComments();
+    <script>
+        const commentsContainer = document.getElementById('comments');
+        let comments = JSON.parse(localStorage.getItem('comments')) || [];
+        function renderComments() {
+            commentsContainer.innerHTML = '';
+            comments.forEach((comment, index) => {
+                commentsContainer.appendChild(createCommentElement(comment, index));
+            });
+        }
+        function createCommentElement(comment, index) {
+            const commentDiv = document.createElement('div');
+            commentDiv.classList.add('comment');
+            commentDiv.dataset.index = index;
+            commentDiv.innerHTML = `
+                <p>${comment.text}</p>
+                <div class="actions">
+                    <button onclick="replyToComment(${index})">Odpowiedz</button>
+                    <button onclick="deleteComment(${index})">Usuń</button>
+                </div>
+                ${comment.replies ? comment.replies.map((reply, replyIndex) => createReplyElement(reply, index, replyIndex)).join('') : ''}
+            `;
+            return commentDiv;
+        }
+        function createReplyElement(reply, commentIndex, replyIndex) {
+            return `
+                <div class="reply" data-comment-index="${commentIndex}" data-reply-index="${replyIndex}">
+                    <p>${reply.text}</p>
+                    <div class="actions">
+                        <button onclick="deleteReply(${commentIndex}, ${replyIndex})">Usuń</button>
+                    </div>
+                </div>
+            `;
+        }
+        function addComment() {
+            const newCommentInput = document.getElementById('newComment');
+            const text = newCommentInput.value.trim();
+            if (text) {
+                comments.push({ text, replies: [] });
+                newCommentInput.value = '';
+                saveComments();
+                renderComments();
+            }
+        }
+        function replyToComment(index) {
+            const text = prompt('Wpisz swoją odpowiedź:');
+            if (text) {
+                comments[index].replies.push({ text });
+                saveComments();
+                renderComments();
+            }
+        }
+        function deleteComment(index) {
+            const password = prompt('Wpisz hasło administratora aby usunąć komentarz:');
+            if (password === 'ablugabluga') {
+                comments.splice(index, 1);
+                saveComments();
+                renderComments();
+            } else {
+                alert('Nieprawidłowe hasło.');
+            }
+        }
+        function deleteReply(commentIndex, replyIndex) {
+            const password = prompt('Wpisz hasło administratora aby usunąć komentarz:');
+            if (password === 'ablugabluga') {
+                comments[commentIndex].replies.splice(replyIndex, 1);
+                saveComments();
+                renderComments();
+            } else {
+                alert('Nieprawidłowe hasło.');
+            }
+        }
+        function saveComments() {
+            localStorage.setItem('comments', JSON.stringify(comments));
+        }
         renderComments();
-      }
-    }
-
-    function replyToComment(index) {
-      const text = prompt('Wpisz swoją odpowiedź:');
-      if (text) {
-        comments[index].replies.push({ text });
-        saveComments();
-        renderComments();
-      }
-    }
-
-    function deleteComment(index) {
-      const password = prompt('Wpisz hasło administratora aby usunąć komentarz:');
-      if (password === 'ablugabluga') {
-        comments.splice(index, 1);
-        saveComments();
-        renderComments();
-      } else {
-        alert('Incorrect password.');
-      }
-    }
-
-    function deleteReply(commentIndex, replyIndex) {
-      const password = prompt('Wpisz hasło administratora aby usunąć komentarz:');
-      if (password === 'ablugabluga') {
-        comments[commentIndex].replies.splice(replyIndex, 1);
-        saveComments();
-        renderComments();
-      } else {
-        alert('Nieprawidłowe hasło. Nie masz uprawnień do usuwania komentarzy.');
-      }
-    }
-
-    function saveComments() {
-      localStorage.setItem('comments', JSON.stringify(comments));
-    }
-
-    renderComments();
-
-         // Update view count and display comments when the page loads
+        // Update view count and display comments when the page loads
         document.addEventListener('DOMContentLoaded', () => {
             updateViewCount();
         });
-  </script>
+    </script>
 </body>
 </html>
