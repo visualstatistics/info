@@ -156,10 +156,18 @@
             cursor: pointer;
             font-size: 0.9em;
         }
-                .reply-box {
+        .comment-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .reply-box {
             border: 1px solid #ddd;
             padding: 10px;
             margin: 10px 20px;
+        }
+        .comment-actions {
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -185,12 +193,6 @@
         Liczba wyświetleń: <span id="viewCount">0</span>
     </div>
 
-    <div class="comment-section">
-        <h3>Dodaj komentarz:</h3>
-        <textarea id="commentInput" rows="4" placeholder="Napisz swój komentarz tutaj..."></textarea>
-        <button onclick="addComment()">Dodaj komentarz</button>
-        <div class="comments" id="comments"></div>
-    </div>
 
     <script>
         // Function to update the view count in localStorage
@@ -205,66 +207,55 @@
             document.getElementById('viewCount').innerText = viewCount;
         }
 
-        // Function to add a comment
-        function addComment() {
-            const commentInput = document.getElementById('commentInput');
-            const commentText = commentInput.value.trim();
-            if (commentText !== "") {
-                const comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
-                comments.push(commentText);
-                localStorage.setItem('comments', JSON.stringify(comments));
-                displayComments();
-                commentInput.value = "";
-            }
-        }
+     let commentsSection = document.getElementById('comments-section');
 
-        // Function to remove a comment
-        function removeComment(index) {
-            const password = prompt("Podaj hasło administratora strony aby usunąć komentarz:");
-            if (password === "adminPassword") {
-                let comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
-                comments.splice(index, 1);
-                localStorage.setItem('comments', JSON.stringify(comments));
-                displayComments();
+        function addComment(parentId = null) {
+            let commentInput = parentId ? document.querySelector(`#reply-input-${parentId}`) : document.getElementById('comment-input');
+            let commentText = commentInput.value;
+            if (!commentText.trim()) {
+                alert('Comment cannot be empty!');
+                return;
+            }
+
+            let commentBox = document.createElement('div');
+            commentBox.className = parentId ? 'reply-box' : 'comment-box';
+            commentBox.innerHTML = `
+                <p>${commentText}</p>
+                <div class="comment-actions">
+                    <button onclick="deleteComment(this)">Usuń</button>
+                    <button onclick="showReplyBox(${parentId ? parentId : new Date().getTime()})">Reply</button>
+                </div>
+                <div class="replies" id="replies-${parentId ? parentId : new Date().getTime()}"></div>
+            `;
+            commentBox.id = `comment-${parentId ? parentId : new Date().getTime()}`;
+
+            if (parentId) {
+                document.getElementById(`replies-${parentId}`).appendChild(commentBox);
             } else {
-                alert("Nieprawidłowe hasło. Nie masz uprawnień do usunięcia tego komentarza.");
+                commentsSection.appendChild(commentBox);
             }
-        }
-         // Function to add a reply to a comment
-        function addReply(commentIndex) {
-            const replyInput = document.getElementById(`replyInput-${commentIndex}`);
-            const replyText = replyInput.value.trim();
-            if (replyText !== "") {
-                const comments = JSON.parse(localStorage.getItem('comments'));
-                comments[commentIndex].replies.push(replyText);
-                localStorage.setItem('comments', JSON.stringify(comments));
-                displayComments();
-                replyInput.value = "";
-            }
+
+            commentInput.value = '';
         }
 
-        // Function to display comments
-        function displayComments() {
-            const comments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
-            const commentsContainer = document.getElementById('comments');
-            commentsContainer.innerHTML = "";
-            comments.forEach((comment, index) => {
-                const commentElement = document.createElement('div');
-                commentElement.classList.add('comment');
-                commentElement.innerHTML = `
-                    <span>${comment}</span>
-                    <button onclick="removeComment(${index})">Usuń</button>
+        function deleteComment(button) {
+            let commentBox = button.closest('.comment-box, .reply-box');
+            commentBox.remove();
+        }
+
+        function showReplyBox(commentId) {
+            let repliesDiv = document.getElementById(`replies-${commentId}`);
+            if (!document.getElementById(`reply-input-${commentId}`)) {
+                let replyBox = document.createElement('div');
+                replyBox.innerHTML = `
+                    <textarea id="reply-input-${commentId}" rows="2" cols="50"></textarea>
+                    <br>
+                    <button onclick="addComment(${commentId})">Submit Reply</button>
                 `;
-                commentsContainer.appendChild(commentElement);
-            });
+                repliesDiv.appendChild(replyBox);
+            }
         }
 
-        // Update view count and display comments when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            updateViewCount();
-            displayComments();
-            addReply();
-        });
     </script>
 </body>
 </html>
