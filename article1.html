@@ -207,7 +207,18 @@
             document.getElementById('viewCount').innerText = viewCount;
         }
 
-     let commentsSection = document.getElementById('comments-section');
+       <h1>Comment Section</h1>
+    <div id="comments-section">
+        <!-- Existing comments will be here -->
+    </div>
+
+    <h2>Leave a Comment</h2>
+    <textarea id="comment-input" rows="4" cols="50"></textarea>
+    <br>
+    <button onclick="addComment()">Submit</button>
+
+    <script>
+        let commentsSection = document.getElementById('comments-section');
 
         function addComment(parentId = null) {
             let commentInput = parentId ? document.querySelector(`#reply-input-${parentId}`) : document.getElementById('comment-input');
@@ -255,6 +266,8 @@
                 repliesDiv.appendChild(replyBox);
             }
         }
+    </script>
+</body>
         // Update view count and display comments when the page loads
         document.addEventListener('DOMContentLoaded', () => {
             updateViewCount();
