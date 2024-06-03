@@ -156,19 +156,34 @@
             cursor: pointer;
             font-size: 0.9em;
         }
-        .comment-box {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin: 10px 0;
-        }
-        .reply-box {
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin: 10px 20px;
-        }
-        .comment-actions {
-            margin-top: 5px;
-        }
+
+        #commentsContainer {
+      max-width: 800px;
+      width: 100%;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    .comment, .reply {
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+      position: relative;
+    }
+    .reply {
+      margin-left: 20px;
+      border-left: 2px solid #ddd;
+    }
+    .comment:last-child, .reply:last-child {
+      border-bottom: none;
+    }
+    .actions {
+      margin-top: 10px;
+    }
+    .actions button {
+      margin-right: 10px;
+    }
+
     </style>
 </head>
 <body>
@@ -192,15 +207,6 @@
     <div class="view-counter">
         Liczba wyświetleń: <span id="viewCount">0</span>
     </div>
-    <h1>Comment Section</h1>
-    <div id="comments-section">
-        <!-- Existing comments will be here -->
-    </div>
-
-    <h2>Leave a Comment</h2>
-    <textarea id="comment-input" rows="4" cols="50"></textarea>
-    <br>
-    <button onclick="addComment()">Submit</button>
 
     <script>
                 // Function to update the view count in localStorage
@@ -214,55 +220,106 @@
             localStorage.setItem('viewCount', viewCount);
             document.getElementById('viewCount').innerText = viewCount;
         }
-        let commentsSection = document.getElementById('comments-section');
 
-        function addComment(parentId = null) {
-            let commentInput = parentId ? document.querySelector(`#reply-input-${parentId}`) : document.getElementById('comment-input');
-            let commentText = commentInput.value;
-            if (!commentText.trim()) {
-                alert('Comment cannot be empty!');
-                return;
-            }
 
-            let commentBox = document.createElement('div');
-            commentBox.className = parentId ? 'reply-box' : 'comment-box';
-            commentBox.innerHTML = `
-                <p>${commentText}</p>
-                <div class="comment-actions">
-                    <button onclick="deleteComment(this)">Usuń</button>
-                    <button onclick="showReplyBox(${parentId ? parentId : new Date().getTime()})">Reply</button>
-                </div>
-                <div class="replies" id="replies-${parentId ? parentId : new Date().getTime()}"></div>
-            `;
-            commentBox.id = `comment-${parentId ? parentId : new Date().getTime()}`;
+<div id="commentsContainer">
+    <h2>Comments</h2>
+    <div id="comments"></div>
+    <div id="addCommentForm">
+      <input type="text" id="newComment" placeholder="Add a comment" />
+      <button onclick="addComment()">Add Comment</button>
+    </div>
+  </div>
 
-            if (parentId) {
-                document.getElementById(`replies-${parentId}`).appendChild(commentBox);
-            } else {
-                commentsSection.appendChild(commentBox);
-            }
+  <script>
+    const commentsContainer = document.getElementById('comments');
+    let comments = JSON.parse(localStorage.getItem('comments')) || [];
 
-            commentInput.value = '';
-        }
+    function renderComments() {
+      commentsContainer.innerHTML = '';
+      comments.forEach((comment, index) => {
+        commentsContainer.appendChild(createCommentElement(comment, index));
+      });
+    }
 
-        function deleteComment(button) {
-            let commentBox = button.closest('.comment-box, .reply-box');
-            commentBox.remove();
-        }
+    function createCommentElement(comment, index) {
+      const commentDiv = document.createElement('div');
+      commentDiv.classList.add('comment');
+      commentDiv.dataset.index = index;
+      commentDiv.innerHTML = `
+        <p>${comment.text}</p>
+        <div class="actions">
+          <button onclick="replyToComment(${index})">Reply</button>
+          <button onclick="deleteComment(${index})">Delete</button>
+        </div>
+        ${comment.replies ? comment.replies.map((reply, replyIndex) => createReplyElement(reply, index, replyIndex)).join('') : ''}
+      `;
+      return commentDiv;
+    }
 
-        function showReplyBox(commentId) {
-            let repliesDiv = document.getElementById(`replies-${commentId}`);
-            if (!document.getElementById(`reply-input-${commentId}`)) {
-                let replyBox = document.createElement('div');
-                replyBox.innerHTML = `
-                    <textarea id="reply-input-${commentId}" rows="2" cols="50"></textarea>
-                    <br>
-                    <button onclick="addComment(${commentId})">Submit Reply</button>
-                `;
-                repliesDiv.appendChild(replyBox);
-            }
-        }
+    function createReplyElement(reply, commentIndex, replyIndex) {
+      return `
+        <div class="reply" data-comment-index="${commentIndex}" data-reply-index="${replyIndex}">
+          <p>${reply.text}</p>
+          <div class="actions">
+            <button onclick="deleteReply(${commentIndex}, ${replyIndex})">Delete</button>
+          </div>
+        </div>
+      `;
+    }
 
+    function addComment() {
+      const newCommentInput = document.getElementById('newComment');
+      const text = newCommentInput.value.trim();
+      if (text) {
+        comments.push({ text, replies: [] });
+        newCommentInput.value = '';
+        saveComments();
+        renderComments();
+      }
+    }
+
+    function replyToComment(index) {
+      const text = prompt('Enter your reply:');
+      if (text) {
+        comments[index].replies.push({ text });
+        saveComments();
+        renderComments();
+      }
+    }
+
+    function deleteComment(index) {
+      const password = prompt('Enter password to delete:');
+      if (password === 'ablugabluga') {
+        comments.splice(index, 1);
+        saveComments();
+        renderComments();
+      } else {
+        alert('Incorrect password.');
+      }
+    }
+
+    function deleteReply(commentIndex, replyIndex) {
+      const password = prompt('Enter password to delete:');
+      if (password === 'ablugabluga') {
+        comments[commentIndex].replies.splice(replyIndex, 1);
+        saveComments();
+        renderComments();
+      } else {
+        alert('Incorrect password.');
+      }
+    }
+
+    function saveComments() {
+      localStorage.setItem('comments', JSON.stringify(comments));
+    }
+
+    renderComments();
+
+
+
+
+        
                 // Update view count and display comments when the page loads
         document.addEventListener('DOMContentLoaded', () => {
             updateViewCount();
