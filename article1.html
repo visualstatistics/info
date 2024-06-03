@@ -148,7 +148,7 @@
             font-size: 0.9em;
         }
 
-        #commentsContainer {
+    #commentsContainer {
       max-width: 800px;
       width: 100%;
       background: white;
@@ -157,9 +157,12 @@
       border-radius: 8px;
     }
     .comment, .reply {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 5px;
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+      position: relative;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
     }
     .reply {
       margin-left: 20px;
@@ -173,6 +176,24 @@
     }
     .actions button {
       margin-right: 10px;
+    }
+    input[type="text"] {
+      width: calc(100% - 110px);
+      padding: 8px;
+      margin-right: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
     }
 
     </style>
