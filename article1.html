@@ -232,15 +232,7 @@
       cursor: pointer;
         font-family: 'Fira Sans', sans-serif;
     }
-#newComment {
-            width: 100%;
-            box-sizing: border-box; /* Ensures padding and border are included in the width */
-        }
-        @media (min-width: 768px) {
-            #newComment {
-                width: 200%; /* Double the width for larger screens */
-            }
-        }
+
     </style>
 </head>
 <body>
@@ -288,8 +280,10 @@
   <div id="commentsContainer">
     <div id="comments"></div>
     <div id="addCommentForm">
-    <textarea id="newComment" rows="5" placeholder="Napisz swój komentarz tutaj..."></textarea>
-    <button onclick="addComment()">Dodaj komentarz</button>
+      <input type="text" id="newComment" placeholder="Napisz swój komentarz tutaj..." />
+      <button onclick="addComment()">Dodaj komentarz</button>
+        
+    </div>
 </div>
 
   </div>
