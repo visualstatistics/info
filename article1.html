@@ -250,60 +250,180 @@
     </style>
 </head>
 
+
+
 <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4CHWVHM"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-    <div class="theme-toggle">
-        <button onclick="toggleTheme()">Toggle Theme</button>
-    </div>
-
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4CHWVHM"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    
     <div class="container-wrapper">
         <div class="full-width-container">
             <article>
                 <h2>Badania koniunktury gospodarczej - wnioski, ocena i podsumowanie wyników</h2>
-                <h3>Kontekst historyczny</h3>
-                <p>...</p>
-
-                <h3>Wyniki badań i analizy</h3>
-                <p>...</p>
-
-                <h3>Wpływ na gospodarkę</h3>
-                <p>...</p>
-
+                <h3>Kontekst</h3>
+                <p>Analiza danych to proces przekształcania surowych danyknknklch w wartościowe informacje, które mogą wspierać decyzje biznesowe. Dzięki nowoczesnym technologiom, takim jak sztuczna inteligencja i uczenie maszynowe, analiza danych stała się bardziej dostępna i skuteczna niż kiedykolwiek wcześniej.</p>
+                <p>Jednym z najważniejszych aspektów analizy danych jest możliwość identyfikowania wzorców i trendów, które mogą nie być widoczne na pierwszy rzut oka. Na przykład, analiza danych sprzedażowych może ujawnić sezonowe wzrosty i spadki popytu, co pozwala firmom lepiej planować swoje zasoby i kampanie marketingowe.</p>
                 <div class="article-images">
-                    <img src="https://via.placeholder.com/800x400" alt="Example Image" class="resize">
+                    <img class="resize" src="pracujacy_gosp.png" alt="Pracujący w gospodarce narodowej">
                 </div>
+                
+                <p>W mojej pracy koncentruję się na wykorzystaniu narzędzi takich jak Python i SQL do analizy dużych zbiorów danych. Moim celem jest nie tylko zrozumienie aktualnych trendów, ale także przewidywanie przyszłych zmian, aby pomóc firmom przygotować się na nadchodzące wyzwania. Dzięki analizie danych mogłem już wielokrotnie wspierać moich klientów w podejmowaniu lepszych decyzji biznesowych, co przyczyniło się do ich sukcesu na rynku.</p>
+              <div class="article-images">
+                    <img class="resize" src="plot_szereg_pkb.png" alt="Szereg czasowy PKB">
+                </div>
+                <h3>Krótko o metodologii</h3>
+                <h3>Wyniki: Koniunktura gospodarcza w przemyśle, budownictwie, handlu, usługach</h3>
+                  <div class="article-images">
+                    <img class="resize" src="szeregi_gosp.png" alt="Szereg czasowy PKB">
+                </div>
+<p>W mojej pracy koncentruję się na wykorzystaniu narzędzi takich jak Python i SQL do analizy dużych zbiorów danych. Moim celem jest nie tylko zrozumienie aktualnych trendów, ale także przewidywanie przyszłych zmian, aby pomóc firmom przygotować się na nadchodzące wyzwania. Dzięki analizie danych mogłem już wielokrotnie wspierać moich klientów w podejmowaniu lepszych decyzji biznesowych, co przyczyniło się do ich sukcesu na rynku.</p>
+    
+                  <div class="article-images">
+                    <img class="resize" src="heat_gosp.png" alt="Szereg czasowy PKB">
+                </div>
+<p>W mojej pracy koncentruję się na wykorzystaniu narzędzi takich jak Python i SQL do analizy dużych zbiorów danych. Moim celem jest nie tylko zrozumienie aktualnych trendów, ale także przewidywanie przyszłych zmian, aby pomóc firmom przygotować się na nadchodzące wyzwania. Dzięki analizie danych mogłem już wielokrotnie wspierać moich klientów w podejmowaniu lepszych decyzji biznesowych, co przyczyniło się do ich sukcesu na rynku.</p>
+    
+                  <div class="article-images">
+                    <img class="resize" src="gosp_ukraina.png" alt="Szereg czasowy PKB">
+                </div>
+                <h3>Wyniki: Koniunktura w gospodarstwach rolnych</h3>
+                <h3>Podsumowanie</h3>
             </article>
         </div>
-
-        <div class="full-width-container comment-section">
-            <h3>Skomentuj:</h3>
-            <textarea placeholder="Dodaj komentarz..."></textarea>
-            <button>Wyślij</button>
-        </div>
-        
-        <div id="commentsContainer" class="container">
-            <div class="comments">
-                <div class="comment">
-                    <p>Komentarz 1...</p>
-                    <div class="actions">
-                        <button>Odpowiedz</button>
-                    </div>
-                </div>
-                <div class="reply">
-                    <p>Odpowiedź do komentarza 1...</p>
-                    <div class="actions">
-                        <button>Odpowiedz</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
+    <div class="social-icons">
+        <p><a href="index.html">Powrót do strony głównej</a></p>
     </div>
 
+
+    <div class="view-counter">
+        Liczba wyświetleń: <span id="viewCount">0</span>
+    </div>
+
+
     <script>
+        // Function to update the view count in localStorage
+        function updateViewCount() {
+            let viewCount = localStorage.getItem('viewCount');
+            if (viewCount) {
+                viewCount = parseInt(viewCount) + 1;
+            } else {
+                viewCount = 1;
+            }
+            localStorage.setItem('viewCount', viewCount);
+            document.getElementById('viewCount').innerText = viewCount;
+        }
+    </script>
+
+
+
+    
+    
+  <div id="commentsContainer">
+    <div id="comments"></div>
+    <div id="addCommentForm">
+      <input type="text" id="newComment" placeholder="Napisz swój komentarz tutaj..." />
+      <button onclick="addComment()">Dodaj komentarz</button>
+        
+    </div>
+</div>
+
+  </div>
+
+  <script>
+    const commentsContainer = document.getElementById('comments');
+    let comments = JSON.parse(localStorage.getItem('comments')) || [];
+
+    function renderComments() {
+      commentsContainer.innerHTML = '';
+      comments.forEach((comment, index) => {
+        commentsContainer.appendChild(createCommentElement(comment, index));
+      });
+    }
+function chBackcolor(color) {
+   document.body.style.background = color;
+}
+    function createCommentElement(comment, index) {
+      const commentDiv = document.createElement('div');
+      commentDiv.classList.add('comment');
+      commentDiv.dataset.index = index;
+      commentDiv.innerHTML = `
+        <p>${comment.text}</p>
+        <div class="actions">
+          <button onclick="replyToComment(${index})">Odpowiedz</button>
+          <button onclick="deleteComment(${index})">Usuń</button>
+        </div>
+        ${comment.replies ? comment.replies.map((reply, replyIndex) => createReplyElement(reply, index, replyIndex)).join('') : ''}
+      `;
+      return commentDiv;
+    }
+
+    function createReplyElement(reply, commentIndex, replyIndex) {
+      return `
+        <div class="reply" data-comment-index="${commentIndex}" data-reply-index="${replyIndex}">
+          <p>${reply.text}</p>
+          <div class="actions">
+            <button onclick="deleteReply(${commentIndex}, ${replyIndex})">Usuń</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function addComment() {
+      const newCommentInput = document.getElementById('newComment');
+      const text = newCommentInput.value.trim();
+      if (text) {
+        comments.push({ text, replies: [] });
+        newCommentInput.value = '';
+        saveComments();
+        renderComments();
+      }
+    }
+
+    function replyToComment(index) {
+      const text = prompt('Wpisz swoją odpowiedź:');
+      if (text) {
+        comments[index].replies.push({ text });
+        saveComments();
+        renderComments();
+      }
+    }
+
+    function deleteComment(index) {
+      const password = prompt('Wpisz hasło administratora aby usunąć komentarz:');
+      if (password === 'C8n:rtEeJ9b1') {
+        comments.splice(index, 1);
+        saveComments();
+        renderComments();
+      } else {
+        alert('Nieprawidłowe hasło. Nie masz uprawnień do usuwania komentarzy.');
+      }
+    }
+
+    function deleteReply(commentIndex, replyIndex) {
+      const password = prompt('Wpisz hasło administratora aby usunąć komentarz:');
+      if (password === 'C8n:rtEeJ9b1') {
+        comments[commentIndex].replies.splice(replyIndex, 1);
+        saveComments();
+        renderComments();
+      } else {
+        alert('Nieprawidłowe hasło. Nie masz uprawnień do usuwania komentarzy.');
+      }
+    }
+
+    function saveComments() {
+      localStorage.setItem('comments', JSON.stringify(comments));
+    }
+
+    renderComments();
+
+         // Update view count and display comments when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            updateViewCount();
+        });
+
         function toggleTheme() {
             const body = document.body;
             const currentTheme = body.style.backgroundColor;
