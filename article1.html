@@ -421,77 +421,11 @@ wartości mieszczą się w przedziale [-100, 100].</p>
 function chBackcolor(color) {
    document.body.style.background = color;
 }
-    function createCommentElement(comment, index) {
-      const commentDiv = document.createElement('div');
-      commentDiv.classList.add('comment');
-      commentDiv.dataset.index = index;
-      commentDiv.innerHTML = `
-        <p>${comment.text}</p>
-        <div class="actions">
-          <button onclick="replyToComment(${index})">Odpowiedz</button>
-          <button onclick="deleteComment(${index})">Usuń</button>
-        </div>
-        ${comment.replies ? comment.replies.map((reply, replyIndex) => createReplyElement(reply, index, replyIndex)).join('') : ''}
-      `;
-      return commentDiv;
-    }
 
-    function createReplyElement(reply, commentIndex, replyIndex) {
-      return `
-        <div class="reply" data-comment-index="${commentIndex}" data-reply-index="${replyIndex}">
-          <p>${reply.text}</p>
-          <div class="actions">
-            <button onclick="deleteReply(${commentIndex}, ${replyIndex})">Usuń</button>
-          </div>
-        </div>
-      `;
-    }
+      
 
-    function addComment() {
-      const newCommentInput = document.getElementById('newComment');
-      const text = newCommentInput.value.trim();
-      if (text) {
-        comments.push({ text, replies: [] });
-        newCommentInput.value = '';
-        saveComments();
-        renderComments();
-      }
-    }
-
-    function replyToComment(index) {
-      const text = prompt('Wpisz swoją odpowiedź:');
-      if (text) {
-        comments[index].replies.push({ text });
-        saveComments();
-        renderComments();
-      }
-    }
-
-    function deleteComment(index) {
-      const password = prompt('Wpisz hasło administratora aby usunąć komentarz:');
-      if (password === 'haslo') {
-        comments.splice(index, 1);
-        saveComments();
-        renderComments();
-      } else {
-        alert('Nieprawidłowe hasło. Nie masz uprawnień do usuwania komentarzy.');
-      }
-    }
-
-    function deleteReply(commentIndex, replyIndex) {
-      const password = prompt('Wpisz hasło administratora aby usunąć komentarz:');
-      if (password === 'C8n:rtEeJ9b1') {
-        comments[commentIndex].replies.splice(replyIndex, 1);
-        saveComments();
-        renderComments();
-      } else {
-        alert('Nieprawidłowe hasło. Nie masz uprawnień do usuwania komentarzy.');
-      }
-    }
-
-    function saveComments() {
-      localStorage.setItem('comments', JSON.stringify(comments));
-    }
+ 
+      
 
     renderComments();
 
