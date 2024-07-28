@@ -285,6 +285,44 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
              <div class="social-icons">
         <p><a href="index.html">Powrót do strony głównej</a></p>
     </div>
+ <script>
+
+
+    function renderComments() {
+      commentsContainer.innerHTML = '';
+      comments.forEach((comment, index) => {
+        commentsContainer.appendChild(createCommentElement(comment, index));
+      });
+    }
+function chBackcolor(color) {
+   document.body.style.background = color;
+}
+
+      
+
+ 
+      
+
+    renderComments();
+
+         // Update view count and display comments when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            updateViewCount();
+        });
+
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.style.backgroundColor;
+
+            if (currentTheme === 'rgb(26, 26, 26)') { // Dark mode
+                body.style.backgroundColor = '#f0f0f0';
+                body.style.color = '#1a1a1a';
+            } else { // Light mode
+                body.style.backgroundColor = '#1a1a1a';
+                body.style.color = '#f0f0f0';
+            }
+        }
+    </script>
 
  
 </body>
