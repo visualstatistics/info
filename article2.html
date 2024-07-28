@@ -1,1 +1,378 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K4CHWVHM');</script>
+    <!-- End Google Tag Manager -->
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Badania koniunktury gospodarczej - GUS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Fira Sans', sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1300px;
+            margin: 20px;
+        }
+        .container, .full-width-container {
+            width: 90%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin: 10px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        h1, h2, h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        a {
+            color: #1da1f2;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #1da1f2;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+        a:hover {
+            background: #1da1f2;
+            color: #fff;
+        }
+        .social-icons {
+            margin-top: 10px;
+        }
+        .social-icons a {
+            margin: 0px;
+            font-size: 1.5em;
+            transition: transform 0.3s;
+        }
+        .social-icons a:hover {
+            transform: scale(1.1);
+        }
+        article {
+            text-align: left;
+            margin-top: 20px;
+        }
+        article h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        article p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .article-images img {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0px;
+        }
+        .article-images img.resize {
+            width: 100%;
+        }
+        @media (max-width: 768px) {
+            h1, h2, h3 {
+                font-size: 1.5em;
+            }
+            p, article p {
+                font-size: 1em;
+            }
+            .article-images img {
+                max-width: 100%;
+                height: auto;
+            }
+            .article-images img.resize {
+                width: 200%;
+            }
+        }
+        .view-counter {
+            margin-top: 15px;
+            margin-bottom: 40px;
+            font-size: 1.2em;
+            color: #ccc;
+        }
+        .comment-section {
+            margin-top: 0px;
+            width: 90%;
+            max-width: 800px;
+        }
+        .comment-section h3 {
+            text-align: left;
+        }
+        .comment-section textarea {
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 0px;
+            resize: vertical;
+        }
+        .comment-section button {
+            padding: 10px 20px;
+            background-color: #1da1f2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 80px;
+        }
+        .comment-section button:hover {
+            padding: 8px 16px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: #1DA1F2;
+            color: white;
+            cursor: pointer;
+        }
+        .comments {
+            margin-top: 1px;
+            margin-bottom: 1px;
+            text-align: left;
+            font-family: 'Fira Sans', sans-serif;
+        }
+        .comment button {
+            padding: 5px 10px;
+            margin-top: 1px;
+            margin-bottom: 1px;
+            background-color: #1da1f2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Fira Sans', sans-serif;
+            font-size: 0.9em;
+        }
+        .reply button {
+            padding: 5px 10px;
+            background-color: #1da1f2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Fira Sans', sans-serif;
+            font-size: 0.9em;
+        }
+        #commentsContainer {
+            max-width: 724px;
+            width: 100%;
+            padding: 20px;
+            margin-top: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+        }
+        .comment, .reply {
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            position: relative;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            text-align: left;
+            font-family: 'Fira Sans', sans-serif;
+            margin-top: 1px;
+            margin-bottom: 1px;
+        }
+        .reply {
+            margin-left: 30px;
+            margin-top: 1px;
+            border-left: 2px solid #ddd;
+            font-family: 'Fira Sans', sans-serif;
+        }
+        .comment:last-child, .reply:last-child {
+            border-bottom: none;
+        }
+        .actions {
+            margin-top: 1px;
+        }
+        .actions button {
+            margin-right: 10px;
+        }
+        input[type="text"] {
+            width: calc(100% - 140px);
+            padding: 8px;
+            margin-right: 40px;
+            margin-top: 60px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Fira Sans', sans-serif;
+        }
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+            font-family: 'Fira Sans', sans-serif;
+        }
+        button:hover {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            font-family: 'Fira Sans', sans-serif;
+        }
+        .theme-toggle {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4CHWVHM"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    <div class="theme-toggle">
+        <button onclick="toggleTheme()">Zmień tryb kolorystyki strony (jasny/ciemny)</button>
+    </div>
+    
+    <div class="container-wrapper">
+        <div class="full-width-container">
+            <article>
+                <h2>Badania koniunktury gospodarczej i koniunktury w gospodarstwach rolnych - wnioski, ocena i podsumowanie wyników</h2>
+                <h3>Kontekst</h3>
+                <p>Polska gospodarka przeszła wręcz rewolucyjne zmiany w ostatnich 35 latach - od ściśle zależnego od ZSRR i zdominowanego przez własność państwową modelu gospodarki centralnie sterowanej 
+                    do zdywersyfikowanego modelu gospodarki wolnorynkowej z istotnym udziałem własności prywatnej.</p>
+            
+                <p>Biorąc tym samym pod uwagę wzrost liczby przedsiębiorstw, bieżące zmiany strukturalne, rozwój nowych działów, a także wzrost gospodarczego zróżnicowania regionalnego pojawiła się potrzeba stworzenia
+                    narzędzi, które umożliwiłyby badanie zmian zachodzących w gospodarce w kompleksowy i ciągły sposób z jednoczesnym uwzględnieniem elementu regionalnego i możliwości
+                    przewidywania przyszłych tendencji. Zmian i tendencji, które nie dotyczyłyby konkretnych wyników finansowych, rynkowych czy sprzedażowych na których opierają się np. dane dot. PKB, 
+                    bezrobocia czy handlu międzynarodowego,
+    lecz które wynikałyby z opinii i nastrojów występujących wśród samych przedsiębiorców.</p>
+
+               <p> Spójrzmy więc wpierw na niektóre <i>fizyczne</i> (ilościowe) dane gospodarcze. Dla ogólnego przykładu postanowiłem wziąć pod uwagę dane regionalne dot. udziału pracujących w poszczególnych 
+                sektorach gospodarki narodowej oraz dane dot. dynamiki PKB na osobę od 2014 roku, które przedstawiam na poniższych mapach i wykresie.</p> 
+
+                                <div class="article-images">
+                    <img class="resize" src="pracujacy_gosp.png" alt="Pracujący w gospodarce narodowej">
+                </div>
+                                                                  <div class="article-images">
+                    <img class="resize" src="plot_szereg_pkb.png" alt="Szereg czasowy PKB">
+                </div>
+                <p>W przypadku map już na pierwszy rzut oka możemy zauważyć istotne różnice - przykładowo udział
+                pracujących w rolnictwie różni się blisko dziesięciokrotne na poziomie wojewódzkim.
+                Wśród innych czynników ma to związek z kwestiami terytorialnej przynależności historycznej regionów Polski oraz wynikającego m.in. z tego powodu zróżnicowanego poziomu urbanizacji, uprzemysłowienia i rozdrobnienia gospodarstw rolnych (czynniki tj. lokalizacja państwowych gospodarstw rolnych w okresie gospodarki centralnie sterowanej czy lokalizacja złóż surowców naturalnych).
+                   Również w przemyśle i budownictwie występują dość wyraźne róźnice - stosunkowo niski udział pracujących w województwach wschodnich oraz w największych aglomeracjach, a najwyższy w niektórych ośrodkach powiatowych i w regionach górniczych.
+Z kolei w usługach i handlu udział pracujących jest zbliżony na poziomie wojewódzkim lecz istotnie zróżnicowany na poziomie powiatowym. Najwyższe wartości notowane są w tym przypadku w miastach na prawach powiatu oraz ośrodkach turystycznych</p>
+
+                <p>W przypadku dynamiki PKB Polska notowała natomiast znaczące wahania w ostatnich 20 latach - między 98,1 w 2020 a 107,5 w 2021 r. Wahania te były spowodowane wieloma czynnikami, w tym kryzysem światowym z 2009, kryzysem strefie Euro i spadkiem wartości dotacji unijnych w 2012, pandemią Covid w 2020 czy inwazją Rosji na Ukrainę w 2022. </p>
+<p>Struktura pracujących w gopodarce narodowej i wzrost PKB to tylko jedne z wielu czynników, które mają wpływ na koniunkturę i jej regionalne zróżnicowanie w danym kraju. Występuje jednocześnie wiele czynników nadzwyczajnych, w tym czynników, których nie da się bezpośrednio zmierzyć lub określić. 
+    Z tych względów, a także ze względu na potrzebę stworzenia źródła informacji wyprzedzających dot. stanu gospodarki, wprowadzone zostały narzędzia jakimi są prowadzone przez GUS <b>badania koniunktury gospodarczej</b> oraz <b>badanie koniunktury w gospodarstwach rolnych</b>. W kolejnych częściach artykułu przyjrzymy się ich metodologii,
+    a w szczególności niektórym z dotychczasowych wyników.</p>
+                <h3>Krótko o metodologii</h3>
+               <p> <b>Badania koniunktury gospodarczej</b> prowadzone są w obecnej formie co miesiąc od 2000 r. i obejmują 4 sektory: handel, usługi, budownictwo i przetwórstwo przemysłowe. Łącznie branych jest w nich pod uwagę blisko 20 tys. przedsiębiorstw
+                działających na terenie kraju. </p>
+<p> <b>Badanie koniunktury w gospodarstwach rolnych</b> przeprowadzane jest z kolei w odstępach półrocznych (zazwyczaj w styczniu i w lipcu danego roku). Branych jest w nim pod uwagę ponad 20 tys. gospodarstw rolnych z terenu całego kraju - wszystkie gospodarstwa prowadzące przez osoby prawne oraz 1,5% reprezentatywna próba gospodarstw indywidualnych/osób fizycznych.
+</p>
+<p>Cechami wspólnymi obu badań są natomiast zmienne oraz sposób obliczania wskaźników, czyli liczbowych reprezentacji danych wynikowych. Zmienne dotyczą w tym przypadku dotychczasowej i bieżącej sytuacji przedsiębiorstwa/gospodarstwa, prognozowanej 
+    przyszłej sytuacji przedsiębiorstwa/gospodarstwa oraz czynników nadzwyczajnych występujących w otoczeniu gospodarczym (np. pandemia Covid czy konflikty międzynarodowe). Z kolei wskaźniki 
+dzielą się na proste i złożone. Proste są obliczane na podstawie sald odpowiedzi na poszczególne pytania (przykładowo różnice odpowiedzi pozytywnych i negatywnych na pytanie o aktualną sytuację gospodarczą przedsiębiorstwa), z kolei wskaźniki złożone budowane są na podstawie średnich arytmetycznych sald odpowiedzi dot. pytań z części diagnostycznej i prognostycznej badania. W obu przyadkach
+wartości mieszczą się w przedziale [-100, 100].</p>
+ <p>W artykule skupimy się wyłącznie na wskaźnikach prostych dot. sald odpowiedzi dot. zmiany sytuacji przedsiębiorstw/gospodarstw w okresie poprzedzającym, prognozowanych zmian, a także wskaźniku złożonym budowanym na ich podstawie. Sprawdzimy również jak istotny wpływ na poszczególne sektory ma wg przedsiębiorców wojna w Ukrainie.</p>               
+
+
+                
+                <h3>Wyniki: Koniunktura gospodarcza w przemyśle, budownictwie, handlu, usługach</h3>
+               <p> W pierwszej kolejności sprawdźmy wyniki dot. ocen dotychczasowej i przewidywanej ogólnej sytuacji gospodarczej przedsiębiorstw w poszczególnych sektorach od 2000 roku. Wyjątkiem jest badanie koniunktury w 
+               handlu, którego pierwsza edycja przeprowadzona została dopiero w styczniu 2003 roku:</p>
+                  <div class="article-images">
+                    <img class="resize" src="szeregi_gosp.png" alt="Szereg gosp">
+                </div>
+<p>Jakie wnioski możemy wyciągnąć z tych wyników? Kryzys światowy z 2008/9 roku miał zróżnicowany wpływ na poszczególne sektory gospodarki narodowej - najsilniejszy na budownictwo, najsłabszy na handel. Podobnie istotny wpływ
+    na sektor budowlany miało osłabienie gospodarcze z 2012 roku. Może być to spowodowane dysproporcjonalnie silnym wpływem na sektor mieszkaniowy (który istotnie reaguje na kryzysy i nieprzewidywalność) oraz zmniejszeniem się inwestycji
+    budowlanych spowodowanym m.in.spadkiem zakresu publicznych środków przeznaczanych na inwestycje w tm okresie.</p>
+                <p>W przypadku wszystkich sektorów gospodarczych wpływ pandemii Covid był znaczący lecz w swojej najsilniejszej fazie krótkotrwały. Zarówno pandemia jak i wojna nasiliły pesymizm wśród przedsiębiorców
+                    co do przyszłej sytuacji gospodarczej ich przedsiębiorstw. Nieprzewidywalność czynników zewnętrznych, wzrost kosztów działalności i trudność w planowaniu długookresowym doprowadziły do utrzymujących
+                    się do dziś negatywnych prognoz we wszystkich koniunkturach. Pewną charakterystyczną cechą jest też zaburzenie typowych cykli koniunkturalnych/sezonowych, które widoczne były szczególnie
+                    w budonictwie. W krócie: wpływ sytuacji pogodowej ulega od 2020 roku wpływom sytuacji w otoczeniu biznesowym i międzynarodowym.</p>
+
+                <p>Zmiany te są również wyraźne oznaczone na poniższych mapach ciepła. Wpływ czynników nadzwyczajnych ma zasięg ogólnokrajowy i tylko w niektórych przypadkach jak w sekcji dot. transportu i gospodarki magazynowej
+                    można potencjalnie zauważyć pewien istotniejszy wpływ wydarzeń za naszą wschodnią granicą na sytuację gospodarczą w województwach wschodnich. Są to jednak interpretacje sytuacyjne niepodparte bardziej szczegółowymi analizami.</p>
+                
+                  <div class="article-images">
+                    <img class="resize" src="heat_gosp.png" alt="Mapa ciepla gosp">
+                </div>
+
+                <p>Na koniec, wracając ponownie do danych ogólnopolskich postanowiłem sprawdzić jak przedsiębiorcy oceniają aktualnie wpływ wojny w Ukrainie na swoją działalność. Jak się okazuje ok. 10% ocenia ten wpływ
+                jako poważny lub zagrażający stabilności firmy, największy udział w handlu hurtowym, najmniejszy w usługach. Może być to m.in. oznaką stopniowego dostosowywania się przedsiębiorsw do sytuacji, znalezienia nowych
+                rynków zbytu kosztem Rosji i Białorusi oraz ograniczenia efektu zablokowania importu paliw kopalnych używanych w sektorze energetycznym.</p>
+    
+                  <div class="article-images">
+                    <img class="resize" src="gosp_ukraina.png" alt="wplyw wojny gosp">
+                </div>
+                <h3>Wyniki: Koniunktura w gospodarstwach rolnych</h3>
+               <p> Przejdźmy teraz do wyników koniunktury w gospodarstwach rolnych. Analogicznie jak w przypadku koniunktur gospodarczych w pierwszej kolejności sprawdzimy jak wyglądają oceny właścicieli gospodarstw rolnych 
+                dot. zmian dotychczasowej sytuacji ich gospodarstw i przewidywań co do przyszłości. </p>
+                   <p>Od pierwszej edycji badania w 2012 roku wskaźniki sytuacji ogólnej dla kraju pozostają negatywne. 
+                       Jednocześnie prognozy utrzymują się na mniej pesymistycznym poziomie za wyjątkiem badania przeprowadzonego w styczniu 2022 roku (2021_2). Od 2022 r. do dziś notowane są z kolei najbardziej negatywne 
+                       wyniki dot. zarówno sytuacji dotychcasowej jak i przewidywanej.
+                   </p>
+                    <div class="article-images">
+                    <img class="resize" src="szereg-roln.png" alt="Szereg czasowy roln">
+                </div>
+
+                <p>Tendencje te są zauważalne w jeszcze wyraźniejszym stopniu na poziomie wojewódzkim. Od drugiej połowy 2021 roku widzimy istotne pogorszenie się sytuacji ogólnej gospodarstw rolnych dodatkowo spotęgowane wpływem wojny w
+                    Ukrainie. Najwyższe wartości wskaźnika osiągane są w województwie lubuskim. Pewną ciekawostką, którą uwidaczniają wykresy pudełkowe jest
+                    istotniejsze skupienie wartości wyników dotychczasowych badań w województwach z najbardziej rozdrobnionym rolnictwem (podkarpackie, małopolskie, świętokrzyskie) co może mieć m.in. związek
+                    z wyższym udziałem produkcji na samozaopatrzenie, a tym samym większej odporności na czynniki zewnętrzne, w tym zaburzenia eksportu towarów rolnych, importu nawozów czy ceny sprzedaży.</p>
+                                  <div class="article-images">
+                    <img class="resize" src="box_rolnictwo.png" alt="Mapa ciepla i wykres pud roln">
+                </div>
+                <p>Najistotniejsze różnice między badaniami koniunktury gospodarczej a badaniami koniunktury w gospodarstwach rolnych można zauważyć w przypadku deklarowanego wpływu wojny w Ukrainie. Był on dysproporcjonalnie silny w gospodarstwach rolnych - 
+                    ponad 50% właścicieli stwierdziło w styczniu 2024 r., że był on poważny lub zagrażający stabilności gospodarstwa rolnego. Istotność wpływu rosła wraz ze wzrostem śreniej powierzchni gospodarstwa:
+                </p>
+                                                  <div class="article-images">
+                    <img class="resize" src="ukraina_roln.png" alt="wplyw wojny na gospodarstwa">
+                </div>
+                <h3>Podsumowanie</h3>
+                <p>Badania koniunktury dostarczają wielu cennych informacji dot. sytuacji gospodarczej w Polsce, których nie można uzyskać z tradycyjnych, ilościowych danych. W artykule wziąłem pod uwagę tylko niewielką część wyników, natomiast wyłącznie na ich podstawie możemy zauważyć
+                jak istotny wpływ na działalność gospodarczą mają wydarzenia ostatnich lat. Kwestie psychologiczne odgrywają również stotną rolę, szczególnie w sytuacji gdy przedsiębiorcy mierzą się z istotnymi trudnościami w planowaniu swojej działalności gospodarczej w niestabilnym otoczeniu biznesowym,
+            i międzynarodowym. Szczególnie negatywna sytuacja odnotowywana jest w sektorze rolniczym. Jest to dział gospodarki generujący ok. 2% całkowitej wartości PKB, lecz zatrudniający jednocześnie ponad 8% ogółu pracujących.
+                    Długotrwale utzymujące się negatywne tendencje pod względem ogólnej sytuacji gospodarstw, opłacalności działalności i sprzedaży towarów mogą mieć potencjalnie znaczący wpływ na pozostałe sektory gospodarki, a tym samym m.in. tendencje
+                    inflacyjne.</p>
+            </article>
+<br><br>
+            
+             <div class="social-icons">
+        <p><a href="index.html">Powrót do strony głównej</a></p>
+    </div>
+
+ 
+</body>
+</html>
