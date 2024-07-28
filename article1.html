@@ -373,44 +373,12 @@ wartości mieszczą się w przedziale [-100, 100].</p>
         <p><a href="index.html">Powrót do strony głównej</a></p>
     </div>
 
-
-    <div class="view-counter">
-        Liczba wyświetleń: <span id="viewCount">0</span>
-    </div>
-
-
-    <script>
-        // Function to update the view count in localStorage
-        function updateViewCount() {
-            let viewCount = localStorage.getItem('viewCount');
-            if (viewCount) {
-                viewCount = parseInt(viewCount) + 1;
-            } else {
-                viewCount = 1;
-            }
-            localStorage.setItem('viewCount', viewCount);
-            document.getElementById('viewCount').innerText = viewCount;
-        }
-    </script>
-
-
-
     
     
-  <div id="commentsContainer">
-    <div id="comments"></div>
-    <div id="addCommentForm">
-      <input type="text" id="newComment" placeholder="Napisz swój komentarz tutaj..." />
-      <button onclick="addComment()">Dodaj komentarz</button>
-        
-    </div>
-</div>
 
-  </div>
 
   <script>
-    const commentsContainer = document.getElementById('comments');
-    let comments = JSON.parse(localStorage.getItem('comments')) || [];
+
 
     function renderComments() {
       commentsContainer.innerHTML = '';
